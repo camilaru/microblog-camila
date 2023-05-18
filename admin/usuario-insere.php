@@ -1,7 +1,29 @@
 <?php 
+//importando arquivos
+require_once"../inc/funcoes-usuarios.php";
 require_once "../inc/cabecalho-admin.php";
-?>
 
+
+/* Detectando se o formulario foi acionado (clique no botão, ou ao pressionar enter) */
+if(isset($_POST['inserir'])){
+	/*Capturando dados informados*/ 
+	$nome = $_POST['nome'];
+	$email = $_POST['email'];
+
+	/*No caso de senha, capturamos e codificamos*/
+	$senha = password_hash($_POST['senha'], PASSWORD_DEFAULT);
+
+	$tipo = $_POST['tipo'];
+
+	/* Chamando a função para inserir um novo usuario, e passando para
+	 ela dados capturados a partir do formulario*/
+	inserirUsuario($conexao, $nome, $email, $senha, $tipo);
+
+
+	/* Após inserir o novo usuario, redirecionamos para a página usuarios do site*/
+	header("location:usuarios.php");
+}
+?>
 
 <div class="row">
 	<article class="col-12 bg-white rounded shadow my-1 py-4">

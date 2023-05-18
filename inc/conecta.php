@@ -13,7 +13,9 @@ mysqli_set_charset($conexao, "utf8");
 
 if (!$conexao) {
     die(mysqli_connect_error($conexao));
-} else {
-    //  Senão, deu tudo certo!
-    echo "<p>beleza, banco conectado</p>";
-}
+// } else {
+//     //  Senão, deu tudo certo!
+//     echo "<p>beleza, banco conectado</p>";
+ }
+
+ 
