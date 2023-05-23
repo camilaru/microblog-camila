@@ -25,21 +25,21 @@ function lerUsuarios($conexao)
     $sql = "SELECT id, nome, email, tipo FROM usuarios ORDER BY nome";
 
     $resultado = mysqli_query($conexao, $sql)
-    or die(mysqli_error($conexao));
+        or die(mysqli_error($conexao));
     /* Criando um array vazio que receberá outros arrays contendodados de cada usuario*/
     $usuarios = [];
     /* Loop while (enquanto) que cada ciclo de repetição. irá extrair os dados de cada usuario proveniente do resultado da consulta. Essa extração é feita pela função my_sqli_fech_assoc e é guardada na variavel $usuario. */
-    while($usuario = mysqli_fetch_assoc($resultado)){
+    while ($usuario = mysqli_fetch_assoc($resultado)) {
         /* Pegamos os dados de cada usuario (array), e os colocamos dentro (array_push) do grande array $usuarios.*/
         array_push($usuarios, $usuario);
     }
     //Levamos para fora da função a matriz $usuarios, contendo os dados de cada $usuario
     return $usuarios;
-
 }
 
 // Usada em usúarios-excluir.php
-function excluiUsuario($conexao, $id){
+function excluiUsuario($conexao, $id)
+{
     /*Montando comando de exclusao(DELETE)passando como 
     condição(WHERE) o id que será excluido.*/
     $sql = "DELETE FROM usuarios WHERE id = $id";
@@ -49,15 +49,26 @@ function excluiUsuario($conexao, $id){
 
 //Usada em usuario-atualiza.php
 //funcao para carregamento/exibição dos dados de um USUÁRIO
-function lerUmUsuario($conexao,$id){
+function lerUmUsuario($conexao, $id)
+{
     $sql = "SELECT * FROM usuarios WHERE id= $id";
- /*Executamos a query (consulta e, em caso de sucesso, guardamos o resultado em memória. 
+    /*Executamos a query (consulta e, em caso de sucesso, guardamos o resultado em memória. 
  OBS.: este resultado ainda não está pronto para ser usado diretamente na aplicação (ou seja, dentro do formulário/pagina HTML)) */
-    $resultado = mysqli_query($conexao, $sql) 
-    or die(mysqli_error($conexao));
-/* Extraimos de dentro do resultado só o que nos interessa: os dados do usuário selecionado, já estruturados como um ARRAY ASSOCIATIVO.*/
+    $resultado = mysqli_query($conexao, $sql)
+        or die(mysqli_error($conexao));
+    /* Extraimos de dentro do resultado só o que nos interessa: os dados do usuário selecionado, já estruturados como um ARRAY ASSOCIATIVO.*/
     return mysqli_fetch_assoc($resultado);
-}//fim lerUsuario
+} //fim lerUsuario
 
 
+//Usada em usuario-atualiza.php
+function atualizarUsuario($conexao, $id, $nome, $email, $senha, $tipo)
+{
+    $sql = "UPDATE usuarios SET nome = '$nome', email = '$email',
+    senha = '$senha' , tipo = '$tipo' WHERE id = $id";
 
+    //Executamos o comando
+    mysqli_query($conexao, $sql) or die(mysqli_error($conexao));
+}
+
+//fim atualizaUsuario

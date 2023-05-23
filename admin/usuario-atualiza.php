@@ -29,12 +29,11 @@ if (isset($_POST['atualizar'])) {
 	} else {
 		$senha = password_hash($_POST['senha'], PASSWORD_DEFAULT);
 	}
+	atualizarUsuario($conexao, $id, $nome, $email, $senha, $tipo);
+	/* Redirecionamos para a pagina com a lista de usuarios */
+	header("location:usuarios.php");
 }
-
-//teste
-echo $senha;
-
-
+// fim if/isset botão
 ?>
 
 
