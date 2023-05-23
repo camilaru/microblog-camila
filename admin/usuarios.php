@@ -41,12 +41,12 @@ $usuarios = lerUsuarios($conexao);
 							<td><?= $usuario['email'] ?> </td>
 							<td><?= $usuario['tipo'] ?></td>
 							<td class="text-center">
-								<a class="btn btn-warning" href="usuario-atualiza.php">
+								<a class="btn btn-warning" href="usuario-atualiza.php?id=<?=$usuario['id']?>">
 									<i class="bi bi-pencil"></i> Atualizar
 								</a>
 
 
-								<!-- Parametro url-->
+								<!-- Parametro url LINK DINÂMICO-->
 								<a class="btn btn-danger excluir" href="usuario-exclui.php?id=<?=$usuario['id']?>">
 									<i class="bi bi-trash"></i> Excluir
 								</a>

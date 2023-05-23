@@ -26,7 +26,7 @@ function lerUsuarios($conexao)
 
     $resultado = mysqli_query($conexao, $sql)
     or die(mysqli_error($conexao));
-    /* Criando um aeeay vazio que receberá outros arrays contendodados de cada usuario*/
+    /* Criando um array vazio que receberá outros arrays contendodados de cada usuario*/
     $usuarios = [];
     /* Loop while (enquanto) que cada ciclo de repetição. irá extrair os dados de cada usuario proveniente do resultado da consulta. Essa extração é feita pela função my_sqli_fech_assoc e é guardada na variavel $usuario. */
     while($usuario = mysqli_fetch_assoc($resultado)){
@@ -47,7 +47,17 @@ function excluiUsuario($conexao, $id){
 }
 
 
-//fim inserirUsuario
+//Usada em usuario-atualiza.php
+//funcao para carregamento/exibição dos dados de um USUÁRIO
+function lerUmUsuario($conexao,$id){
+    $sql = "SELECT * FROM usuarios WHERE id= $id";
+ /*Executamos a query (consulta e, em caso de sucesso, guardamos o resultado em memória. 
+ OBS.: este resultado ainda não está pronto para ser usado diretamente na aplicação (ou seja, dentro do formulário/pagina HTML)) */
+    $resultado = mysqli_query($conexao, $sql) 
+    or die(mysqli_error($conexao));
+/* Extraimos de dentro do resultado só o que nos interessa: os dados do usuário selecionado, já estruturados como um ARRAY ASSOCIATIVO.*/
+    return mysqli_fetch_assoc($resultado);
+}//fim lerUsuario
 
 
 
