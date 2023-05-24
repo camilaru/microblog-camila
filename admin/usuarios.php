@@ -2,6 +2,12 @@
 // Importando as funções de usúarios
 require_once "../inc/funcoes-usuarios.php";
 require_once "../inc/cabecalho-admin.php";
+//Se o usuario logado nao for ADMIN
+
+if($_SESSION['tipo'] != "admin"){
+	header("location:nao-autorizado.php");
+	exit;
+}
 
 /* Chamamos a função lerUsuarios que ao terminar de fazrt os processos de consulta, ela retorna um array contendo os dados de cada usuario; e guardamos estes dados na variavel abaixo*/
 $usuarios = lerUsuarios($conexao);

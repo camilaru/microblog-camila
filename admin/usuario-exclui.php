@@ -1,5 +1,15 @@
 <?php
+require_once "../inc/funcoes-sessao.php";
 require_once "../inc/funcoes-usuarios.php";
+
+
+
+if($_SESSION['tipo'] != "admin"){
+	header("location:nao-autorizado.php");
+	exit;
+}
+
+verificaAcesso();
 
 /* Capturando o valor recebido na url pelo parametro id */
 $id = $_GET["id"];

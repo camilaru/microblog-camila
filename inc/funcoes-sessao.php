@@ -30,5 +30,27 @@ if (!isset($_SESSION['id'])) {
     exit; //or die();
 }
 
+}
 
+//fim verifica acesso
+
+function login($id, $nome, $tipo){
+    /* Criação de variaveis de SESSÂO */
+    $_SESSION['id'] = $id;
+    $_SESSION['nome'] = $nome;
+    $_SESSION['tipo'] =$tipo;
+
+    /* AS Variaveis de sessão ficam disponíveis para a utilização 
+    durante toda duração da sessão, ou seja
+    enquanto o navegador não for fechadoou usúario estiver logado. */
+
+}
+
+//Fim login
+
+function logout(){
+    session_start();
+    session_destroy();
+    header("location:../login.php?logout");
+    exit;
 }
