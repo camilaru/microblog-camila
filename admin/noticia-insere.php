@@ -1,8 +1,31 @@
 <?php 
+require_once "../inc/funcoes-noticias.php";
 require_once "../inc/cabecalho-admin.php";
+
+
+if(isset($_POST['inserir'])){
+	$titulo = $_POST['titulo'];
+	$texto = $_POST['texto'];
+	$resumo = $_POST['resumo'];
+
+	//Pegando o id de usuario logado na sessão
+	$usuarioId =$_SESSION['id'];
+
+	/* Capturando dados do arquivo através do Array superglobal $_FILES */
+	$imagem = $_FILES['imagem'];
+
+	//Executar a função de upload do ARQUIVO
+	upload($imagem);
+
+	//Inserir os dados no banco
+	inserirNoticia($conexao, $titulo, $texto, $resumo, $imagem['name'], $usuarioId);
+	//Redirecionar para a lista de noticias cadastradas
+	header("location:noticias.php");
+
+
+}
+
 ?>
-
-
 <div class="row">
 	<article class="col-12 bg-white rounded shadow my-1 py-4">
 		
@@ -10,7 +33,9 @@ require_once "../inc/cabecalho-admin.php";
 		Inserir nova notícia
 		</h2>
 				
-		<form class="mx-auto w-75" action="" method="post" id="form-inserir" name="form-inserir">            
+		<!-- ATRIBUTO ENCTYPE VALENDO MULTIPART/FORMDATA
+		NECESSÁRIO em formularios que receberão ARQUIVOS (imagens, documentos, pdfs, planilhas) para processamento.-->
+		<form enctype="multipart/form-data" class="mx-auto w-75" action="" method="post" id="form-inserir" name="form-inserir">            
 
 			<div class="mb-3">
                 <label class="form-label" for="titulo">Título:</label>
@@ -23,9 +48,9 @@ require_once "../inc/cabecalho-admin.php";
 			</div>
 
 			<div class="mb-3">
-                <label class="form-label" for="resumo">Resumo (máximo de 300 caracteres):</label>
+                <label class="form-label" for="resumo">Resumo (máximo de 1000 caracteres):</label>
                 <span id="maximo" class="badge bg-danger">0</span>
-                <textarea class="form-control" required name="resumo" id="resumo" cols="50" rows="2" maxlength="300"></textarea> 
+                <textarea class="form-control" required name="resumo" id="resumo" cols="50" rows="2" maxlength="1000"></textarea> 
 			</div>
 
 			<div class="mb-3">

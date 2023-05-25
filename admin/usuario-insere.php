@@ -1,16 +1,16 @@
-<?php 
+<?php
 //importando arquivos
-require_once"../inc/funcoes-usuarios.php";
+require_once "../inc/funcoes-usuarios.php";
 require_once "../inc/cabecalho-admin.php";
 
-if($_SESSION['tipo'] != "admin"){
+if ($_SESSION['tipo'] != "admin") {
 	header("location:nao-autorizado.php");
 	exit;
 }
 
 /* Detectando se o formulario foi acionado (clique no botão, ou ao pressionar enter) */
-if(isset($_POST['inserir'])){
-	/*Capturando dados informados*/ 
+if (isset($_POST['inserir'])) {
+	/*Capturando dados informados*/
 	$nome = $_POST['nome'];
 	$email = $_POST['email'];
 
@@ -31,11 +31,11 @@ if(isset($_POST['inserir'])){
 
 <div class="row">
 	<article class="col-12 bg-white rounded shadow my-1 py-4">
-		
+
 		<h2 class="text-center">
-		Inserir novo usuário
+			Inserir novo usuário
 		</h2>
-				
+
 		<form class="mx-auto w-75" action="" method="post" id="form-inserir" name="form-inserir">
 
 			<div class="mb-3">
@@ -61,15 +61,14 @@ if(isset($_POST['inserir'])){
 					<option value="admin">Administrador</option>
 				</select>
 			</div>
-			
+
 			<button class="btn btn-primary" id="inserir" name="inserir"><i class="bi bi-save"></i> Inserir</button>
 		</form>
-		
+
 	</article>
 </div>
 
 
-<?php 
+<?php
 require_once "../inc/rodape-admin.php";
 ?>
-

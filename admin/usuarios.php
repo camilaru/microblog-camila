@@ -4,7 +4,7 @@ require_once "../inc/funcoes-usuarios.php";
 require_once "../inc/cabecalho-admin.php";
 //Se o usuario logado nao for ADMIN
 
-if($_SESSION['tipo'] != "admin"){
+if ($_SESSION['tipo'] != "admin") {
 	header("location:nao-autorizado.php");
 	exit;
 }
@@ -47,13 +47,13 @@ $usuarios = lerUsuarios($conexao);
 							<td><?= $usuario['email'] ?> </td>
 							<td><?= $usuario['tipo'] ?></td>
 							<td class="text-center">
-								<a class="btn btn-warning" href="usuario-atualiza.php?id=<?=$usuario['id']?>">
+								<a class="btn btn-warning" href="usuario-atualiza.php?id=<?= $usuario['id'] ?>">
 									<i class="bi bi-pencil"></i> Atualizar
 								</a>
 
 
 								<!-- Parametro url LINK DINÂMICO-->
-								<a class="btn btn-danger excluir" href="usuario-exclui.php?id=<?=$usuario['id']?>">
+								<a class="btn btn-danger excluir" href="usuario-exclui.php?id=<?= $usuario['id'] ?>">
 									<i class="bi bi-trash"></i> Excluir
 								</a>
 							</td>

@@ -2,8 +2,6 @@
 // Carregando o script de acesso ao servidor de BD
 require "conecta.php";
 
-
-
 // usada em ADM/usuario.insere.php
 function inserirUsuario($conexao, $nome, $email, $senha, $tipo)
 {
@@ -76,10 +74,11 @@ function atualizarUsuario($conexao, $id, $nome, $email, $senha, $tipo)
 //fim atualizaUsuario
 
 // Usada em login.php
-function buscaUsuario($conexao, $email){
-    $sql ="SELECT * FROM usuarios WHERE email = '$email'";
+function buscaUsuario($conexao, $email)
+{
+    $sql = "SELECT * FROM usuarios WHERE email = '$email'";
     $resultado = mysqli_query($conexao, $sql) or
-    die(mysqli_error($conexao));
+        die(mysqli_error($conexao));
     //retornando um array associativo com os dados se houver
     return mysqli_fetch_assoc($resultado);
 } //Fim buscaUsuario
