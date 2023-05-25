@@ -28,3 +28,30 @@ function upload($arquivo){
     move_uploaded_file($temporario, $destino);
 
 } // fim upload
+
+
+/* Usada em noticias.php */
+function lerNoticias($conexao){
+    $sql ="SELECT 
+        noticias.id, 
+        noticias.titulo, 
+        noticias.data,
+        usuarios.nome
+    FROM noticias INNER JOIN usuarios
+    ON noticias.usuario_id = usuarios.id
+    ORDER BY data DESC";
+
+
+    $resultado = mysqli_query($conexao, $sql) or die(mysqli_error($conexao));
+    
+    //Array vazio
+    $noticias = [];
+
+    while( $noticia = mysqli_fetch_assoc($resultado)){
+        
+        array_push($noticias, $noticia);    
+    }
+
+    //retornamos a matriz noticias
+    return $noticias;
+}//Fim LerNoticias
