@@ -162,7 +162,7 @@ function excluirNoticia($conexao, $idNoticia, $idUsuarioLogado, $tipoUsuarioLoga
     mysqli_query($conexao, $sql) or die(mysqli_error($conexao));
 } //Fim excluirNoticia
 
-/*  Usada para Ler todas as noticias*/
+/*  Usada para Ler todas as noticias usada no index.php*/
 function lerTodasAsNoticias($conexao)
 {
     $sql = "SELECT * FROM noticias ORDER BY data DESC";
@@ -177,3 +177,46 @@ function lerTodasAsNoticias($conexao)
 
     return $noticias;
 } // Fim lerTodasAsNoticias
+
+/* Usada em noticia.ph p*/
+function lerDetalhes($conexao, $id)
+{
+    $sql = "SELECT
+        noticias.id,
+        noticias.titulo,
+        noticias.data,
+        noticias.imagem,
+        noticias.texto,
+        usuarios.nome
+    FROM noticias INNER JOIN usuarios
+    ON noticias.usuario_id
+    WHERE noticias.id = $id";
+    $resultado = mysqli_query($conexao, $sql)
+        or die (mysqli_error($conexao));
+
+        return mysqli_fetch_assoc($resultado);
+} //Fim lerDetalhes
+
+/*Usada em resultados.php */
+function busca($conexao, $termo){
+    $sql = "SELECT * FROM noticias
+    WHERE
+        titulo LIKE '%termo%' OR
+        texto LIKE '%termo%' OR
+        resumo LIKE '%termo%'
+    
+    ORDER BY data DESC";
+
+    $resultado = mysqli_query($conexao, $sql)
+    or die(mysqli_error($conexao));
+
+    $noticias = [];
+
+    while($noticia = mysqli_fetch_assoc($resultado)){
+
+        array_push($noticias, $noticia);
+    }
+
+    //retornando ao array com todas as noticias
+    return $noticias;
+} //Fim resultados
