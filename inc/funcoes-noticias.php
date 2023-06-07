@@ -201,9 +201,9 @@ function lerDetalhes($conexao, $id)
 function busca($conexao, $termo){
     $sql = "SELECT * FROM noticias
     WHERE
-        titulo LIKE '%termo%' OR
-        texto LIKE '%termo%' OR
-        resumo LIKE '%termo%'
+        titulo LIKE '%$termo%' OR
+        texto LIKE '%$termo%' OR
+        resumo LIKE '%$termo%'
     
     ORDER BY data DESC";
 
